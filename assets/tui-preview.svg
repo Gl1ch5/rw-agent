@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360">
+  <rect width="760" height="360" rx="14" fill="#101214" stroke="#2c313c" stroke-width="1.5"/>
+  <circle cx="24" cy="22" r="6" fill="#e06c75"/>
+  <circle cx="44" cy="22" r="6" fill="#e5c07b"/>
+  <circle cx="64" cy="22" r="6" fill="#98c379"/>
+  <text x="380" y="26" fill="#5c6370" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">rw-agent — ~/my-project</text>
+  <line x1="0" y1="40" x2="760" y2="40" stroke="#2c313c" stroke-width="1"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5">
+    <text x="22" y="70" fill="#56b6c2">╭────────────────────────────────────────────────────────────╮</text>
+    <text x="22" y="92" fill="#56b6c2">│ </text>
+    <text x="40" y="92" fill="#56b6c2" font-weight="bold">&gt;_ rw</text>
+    <text x="86" y="92" fill="#5c6370">· minimal read/write agent</text>
+    <text x="614" y="92" fill="#56b6c2">│</text>
+    <text x="22" y="112" fill="#56b6c2">│ </text>
+    <text x="40" y="112" fill="#abb2bf">openrouter · gpt-4o-mini · / for commands</text>
+    <text x="614" y="112" fill="#56b6c2">│</text>
+    <text x="22" y="132" fill="#56b6c2">╰────────────────────────────────────────────────────────────╯</text>
+
+    <text x="22" y="166" fill="#56b6c2" font-weight="bold">›</text>
+    <text x="38" y="166" fill="#abb2bf">add healthcheck endpoint to app.py</text>
+
+    <text x="22" y="198" fill="#5c6370">▸ read</text>
+    <text x="88" y="198" fill="#e5c07b">app.py</text>
+    <text x="152" y="198" fill="#5c6370">(42/42 lines)</text>
+
+    <text x="22" y="222" fill="#5c6370">▸ write</text>
+    <text x="88" y="222" fill="#98c379">app.py</text>
+    <text x="152" y="222" fill="#5c6370">(48 lines, 1140B)</text>
+
+    <text x="22" y="256" fill="#abb2bf">Added GET /health returning {"ok": true} in app.py:44.</text>
+    <text x="22" y="286" fill="#5c6370">▸ 290ms TTFT · 1,180 in (93% cached) · 22 out</text>
+
+    <text x="22" y="324" fill="#56b6c2" font-weight="bold">›</text>
+    <rect x="38" y="311" width="8" height="16" fill="#56b6c2" opacity="0.8"/>
+  </g>
+</svg>

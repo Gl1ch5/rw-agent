@@ -91,9 +91,9 @@ def _run_turn(
             fn = tc.get("function") or {}
             t_name = fn.get("name", "")
             t_args = fn.get("arguments", "{}")
-            with console.status(f"[yellow]⚡ {t_name}...[/yellow]", spinner="line"):
+            with console.status(f"[yellow]▸ {t_name}...[/yellow]", spinner="line"):
                 result_text, target, summary = run_tool(t_name, t_args)
-            console.print(f"[dim]⚡ {t_name:<5}[/dim] [bright_white]{target}[/bright_white] [dim]({summary})[/dim]")
+            console.print(f"[dim]▸ {t_name:<5}[/dim] [bright_white]{target}[/bright_white] [dim]({summary})[/dim]")
             messages.append(
                 {
                     "role": "tool",

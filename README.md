@@ -18,6 +18,10 @@ Only **two tools** (`read`, `write`). Static prefix for **maximum prompt-cache h
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![Tools: 2](https://img.shields.io/badge/Tools-read%20%2B%20write-green.svg)](#architecture)
 
+<br/>
+
+<img src="assets/tui-preview.svg" alt="rw-agent TUI" width="720"/>
+
 </div>
 
 ---

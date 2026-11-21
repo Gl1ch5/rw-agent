@@ -59,7 +59,7 @@ class SlashCompleter(Completer):
 
 def print_banner(console: Console, provider_name: str | None = None, model: str | None = None) -> None:
     title = Text()
-    title.append("⚡ rw ", style="bold bright_cyan")
+    title.append(">_ rw ", style="bold bright_cyan")
     title.append("· minimal read/write agent", style="dim")
     if provider_name and model:
         subtitle = f"[dim]{provider_name}[/dim] [bright_white]{model}[/bright_white]  [dim]│  / for commands[/dim]"
@@ -115,11 +115,11 @@ def run_onboarding(console: Console, cfg: dict[str, Any]) -> dict[str, Any]:
             progress.update(task, advance=65)
 
     if sync_error:
-        console.print(f"[yellow]⚠ Could not fetch /models:[/yellow] [dim]{sync_error}[/dim]")
+        console.print(f"[yellow]! Could not fetch /models:[/yellow] [dim]{sync_error}[/dim]")
         manual = session.prompt(HTML("<b><ansicyan>Fallback Model ID</ansicyan></b> (e.g. gpt-4o-mini): ")).strip()
         models = [manual or "gpt-4o-mini"]
     elif not models:
-        console.print("[yellow]⚠ Endpoint returned 0 models.[/yellow]")
+        console.print("[yellow]! Endpoint returned 0 models.[/yellow]")
         manual = session.prompt(HTML("<b><ansicyan>Model ID</ansicyan></b>: ")).strip()
         models = [manual or "default"]
 

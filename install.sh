@@ -20,7 +20,7 @@ step() {
 }
 
 echo ""
-printf "${CYAN}  ⚡ rw-agent${RESET} ${DIM}— ultra-minimal read/write AI agent${RESET}\n"
+printf "${CYAN}  >_ rw-agent${RESET} ${DIM}— ultra-minimal read/write AI agent${RESET}\n"
 printf "${DIM}  ──────────────────────────────────────────────${RESET}\n"
 
 OS="$(uname -s)"
