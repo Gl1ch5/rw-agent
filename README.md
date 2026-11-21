@@ -24,10 +24,12 @@ Only **two tools** (`read`, `write`). Static prefix for **maximum prompt-cache h
 
 ## Install
 
-### macOS & Linux
+### macOS / Linux / Termux (Android)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Gl1ch5/rw-agent/main/install.sh | bash
 ```
+
+> **Termux:** auto-detected — installs `python` + `git` via `pkg` if needed and links `rw` into `$PREFIX/bin` (no `uv` required).
 
 ### Windows (PowerShell)
 ```powershell

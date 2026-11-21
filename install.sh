@@ -25,36 +25,59 @@ printf "${DIM}  ─────────────────────�
 
 OS="$(uname -s)"
 ARCH="$(uname -m)"
-step 15 "Detected ${OS} (${ARCH})"
-
-# Ensure uv or python3 is available
-if ! command -v uv >/dev/null 2>&1; then
-  step 35 "Installing uv package manager..."
-  if command -v curl >/dev/null 2>&1; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh >/dev/null 2>&1
-  elif command -v wget >/dev/null 2>&1; then
-    wget -qO- https://astral.sh/uv/install.sh | sh >/dev/null 2>&1
-  else
-    printf "${RED}✗ curl or wget is required.${RESET}\n"
-    exit 1
-  fi
-  export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+IS_TERMUX=0
+if [ -n "${TERMUX_VERSION:-}" ] || [ "$(uname -o 2>/dev/null || true)" = "Android" ] || [ -d "/data/data/com.termux/files/usr" ]; then
+  IS_TERMUX=1
 fi
 
-if command -v uv >/dev/null 2>&1; then
-  step 65 "Installing rw-agent via uv..."
-  uv tool install --force "git+${REPO_URL}" >/dev/null 2>&1 || uv tool install --force "git+${REPO_URL}"
-elif command -v python3 >/dev/null 2>&1; then
-  step 65 "Installing rw-agent into ~/.local/share/rw-agent..."
+if [ "$IS_TERMUX" -eq 1 ]; then
+  step 15 "Detected Termux / Android (${ARCH})"
+  if ! command -v python3 >/dev/null 2>&1 || ! command -v git >/dev/null 2>&1; then
+    step 35 "Installing python & git via pkg..."
+    pkg update -y >/dev/null 2>&1 || true
+    pkg install -y python git >/dev/null 2>&1
+  fi
+
+  step 65 "Installing rw-agent into Termux venv..."
   VENV_DIR="$HOME/.local/share/rw-agent/venv"
-  mkdir -p "$HOME/.local/bin"
+  BIN_DIR="${PREFIX:-$HOME/.local}/bin"
+  mkdir -p "$BIN_DIR"
   python3 -m venv "$VENV_DIR"
   "$VENV_DIR/bin/pip" install --quiet --upgrade pip
   "$VENV_DIR/bin/pip" install --quiet --upgrade "git+${REPO_URL}"
-  ln -sf "$VENV_DIR/bin/rw" "$HOME/.local/bin/rw"
+  ln -sf "$VENV_DIR/bin/rw" "$BIN_DIR/rw"
 else
-  printf "${RED}✗ Neither uv nor python3 found.${RESET}\n"
-  exit 1
+  step 15 "Detected ${OS} (${ARCH})"
+
+  # Ensure uv or python3 is available
+  if ! command -v uv >/dev/null 2>&1; then
+    step 35 "Installing uv package manager..."
+    if command -v curl >/dev/null 2>&1; then
+      curl -LsSf https://astral.sh/uv/install.sh | sh >/dev/null 2>&1
+    elif command -v wget >/dev/null 2>&1; then
+      wget -qO- https://astral.sh/uv/install.sh | sh >/dev/null 2>&1
+    else
+      printf "${RED}✗ curl or wget is required.${RESET}\n"
+      exit 1
+    fi
+    export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+  fi
+
+  if command -v uv >/dev/null 2>&1; then
+    step 65 "Installing rw-agent via uv..."
+    uv tool install --force "git+${REPO_URL}" >/dev/null 2>&1 || uv tool install --force "git+${REPO_URL}"
+  elif command -v python3 >/dev/null 2>&1; then
+    step 65 "Installing rw-agent into ~/.local/share/rw-agent..."
+    VENV_DIR="$HOME/.local/share/rw-agent/venv"
+    mkdir -p "$HOME/.local/bin"
+    python3 -m venv "$VENV_DIR"
+    "$VENV_DIR/bin/pip" install --quiet --upgrade pip
+    "$VENV_DIR/bin/pip" install --quiet --upgrade "git+${REPO_URL}"
+    ln -sf "$VENV_DIR/bin/rw" "$HOME/.local/bin/rw"
+  else
+    printf "${RED}✗ Neither uv nor python3 found.${RESET}\n"
+    exit 1
+  fi
 fi
 
 step 100 "Installation complete!"
